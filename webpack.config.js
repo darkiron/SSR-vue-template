@@ -1,17 +1,25 @@
+const path = require('path');
 
-
-const path = require ('path')
+const dev = process.env.NODE_ENV === "dev"
 
 module.exports = {
-	entry: './src/app.js',
+	entry: './src/entry-client.js',
 	output: {
-	    path: path.resolve(__dirname, 'dist'),
-	    filename: 'app.prod.js'
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'index.js'
 	},
+	watch: dev,
 	module: {
-	    rules: [
-	      { test: /\.js$/, use: 'babel-loader' },
-	      { test: /\.vue$/, use: 'vue-loader' }
-	    ]
-  	}
+		rules: [
+			{
+				test: /\.vue$/,
+				use: 'vue-loader'
+			},
+			{
+				test: /\.js$/,
+				use: 'babel-loader'
+			},
+		]
+	},
+	mode: 'development'
 }

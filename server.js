@@ -1,32 +1,39 @@
-#!/usr/bin/env node
 
-const fs = require('fs');
-const express = require('express');
-const { createBundleRenderer } = require('vue-server-renderer');
+const express = require('express')
+const Vue = require('vue')
+const fs = require('fs')
 
-const bundleRenderer = createBundleRenderer(
-  // Load the SSR bundle with require.
-  require('./dist/vue-ssr-bundle.json'),
+const { createBundleRenderer } = require('vue-server-renderer')
+
+ //const appVue = require('./src/App')
+ //const appVue = require('./dist/index.js')
+
+const app = express()
+
+const renderer = createBundleRenderer(
+  require('./dist/vue-ssr-server-bundle.json'),
   {
-    // Yes, I know, readFileSync is bad practice. It's just shorter to read here.
+  	runInNewContext: false,
     template: fs.readFileSync('./index.html', 'utf-8')
   }
-);
+)
 
-// Create the express app.
-const app = express();
 
-// Serve static assets from ./dist on the /dist route.
-app.use('/dist', express.static('dist'));
+app.get('*', (request, response) => {
 
-// Render all other routes with the bundleRenderer.
-app.get('*', (req, res) => {
-  bundleRenderer
-    // Renders directly to the response stream.
-    // The argument is passed as "context" to main.server.js in the SSR bundle.
-    .renderToStream({url: req.path})
-    .pipe(res);
-});
+	const context = { url: request.url }
 
-// Bind the app to this port.
-app.listen(8080);
+	renderer.renderToString(context, (err, html) => {
+	    if (err) {
+	        if (err.code === 404) {
+	          response.status(404).end('Page non trouvée')
+	        } else {
+	          response.status(500).end('Erreur interne du serveur')
+	        }
+	    } else {
+	        response.end(html)
+	    }
+  })
+})
+
+app.listen(8080)
