@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "dev:server": "NODE_ENV=dev webpack --progress --config webpack.server.js",
-    "dev:client": "NODE_ENV=dev webpack --progress --config webpack.server.js",
+    "dev:server": "NODE_ENV=dev webpack --progress --config config/webpack.server.js",
+    "dev:client": "NODE_ENV=dev webpack --progress --config config/webpack.client.js",
+    "dev": "dev:server && dev:client",
     "start": "nodemon --config config.nodemon.js  server.js"
   },
   "author": "",
