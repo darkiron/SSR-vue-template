@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path');
 const merge = require('webpack-merge')
 const nodeExternals = require('webpack-node-externals')
@@ -37,6 +38,10 @@ module.exports = merge(baseConfig, {
   // dans un seul fichier JSON. Le fichier généré par défaut va être
   // `vue-ssr-server-bundle.json`
   plugins: [
-    new VueSSRServerPlugin()
+    new VueSSRServerPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.VUE_ENV': '"server"'
+    }),
   ]
 })

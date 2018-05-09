@@ -7,8 +7,12 @@
 	export default {
 		data () {
 			return {
-				name: ''
+				name: '',
+				// title: 'Hello mon Vincent'
 			}
+		},
+		title () {
+		    return 'foo fighter'
 		},
 		created () {
 			this.name = this.$route.params.name
@@ -21,7 +25,8 @@
 			// afficher l'élément depuis l'état du store.
 		    item () {
 		      return this.$store.state.items[this.$route.params.id]
-		    }
+		    },
+
 		}
 	}
 </script>

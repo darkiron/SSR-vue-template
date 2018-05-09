@@ -38,7 +38,11 @@ module.exports = merge(baseConfig, {
   // dans un seul fichier JSON. Le fichier généré par défaut va être
   // `vue-ssr-server-bundle.json`
   plugins: [
-    new VueSSRClientPlugin()
+    new VueSSRClientPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+      'process.env.VUE_ENV': '"client"'
+    }),
   ],
 
   optimization: {
