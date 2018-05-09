@@ -26,7 +26,7 @@ router.onReady(
 
 			//indicateur de chargement ici
 
-			PRomise.all(activated.map( c => {
+			Promise.all(activated.map( c => {
 				if (c.asyncData) {
 					return c.asyncData({ store, route: to })
 				}

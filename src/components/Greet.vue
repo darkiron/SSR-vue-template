@@ -11,12 +11,11 @@
 			}
 		},
 		created () {
-			console.log(this.$route)
 			this.name = this.$route.params.name
 		},
 		asyncData ({ store, route }) {
 		   // retourner la Promesse depuis l'action
-		   return store.dispatch('fetchItem', route.params.id)
+		   // return store.dispatch('fetchItem', route.params.name)
 		},
 		computed: {
 			// afficher l'élément depuis l'état du store.
