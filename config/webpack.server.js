@@ -18,7 +18,8 @@ module.exports = merge(baseConfig, {
 
   // Cela dit au paquetage serveur d'utiliser les exports au format Node.js
   output: {
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
+    filename: 'es5_server_entry.js'
   },
 
   // https://webpack.js.org/configuration/externals/#function

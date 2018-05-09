@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <!-- les fragments utilisés pour ce rendu vont être préchargés -->
+    <link rel="preload" href="/manifest.js" as="script">
+    <link rel="preload" href="/main.js" as="script">
+    <link rel="preload" href="/0.js" as="script">
+    <!-- les fragments asynchrones non utilisés vont seulement être récupérés (priorité basse) -->
+    <link rel="prefetch" href="/1.js" as="script">
+  </head>
+  <body>
+    <!-- contenu de l'application -->
+    <div data-server-rendered="true"><div>async</div></div>
+    <!-- le fragment du manifeste devrait être le premier -->
+    <script src="/manifest.js"></script>
+    <!-- les fragments asynchrones sont injectés avant le fragment principal -->
+    <script src="/0.js"></script>
+    <script src="/main.js"></script>
+  </body>
+</html>

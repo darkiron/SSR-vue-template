@@ -5,7 +5,7 @@ const dev = process.env.NODE_ENV === "dev"
 module.exports = {
 	output: {
 		path: path.resolve(__dirname, '../dist'),
-		filename: '[name].[chunkhash].js'
+		// filename: '[name].[chunkhash].js'
 	},
 	watch: dev,
 	module: {

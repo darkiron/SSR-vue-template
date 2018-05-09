@@ -11,6 +11,7 @@
 			}
 		},
 		created () {
+			console.log(this.$route)
 			this.name = this.$route.params.name
 		},
 		asyncData ({ store, route }) {

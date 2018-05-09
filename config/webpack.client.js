@@ -1,3 +1,4 @@
+const webpack = require('webpack')
 const path = require('path');
 const merge = require('webpack-merge')
 const nodeExternals = require('webpack-node-externals')
@@ -18,7 +19,8 @@ module.exports = merge(baseConfig, {
 
   // Cela dit au paquetage serveur d'utiliser les exports au format Node.js
   output: {
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
+    filename: 'es5_client_entry.js'
   },
 
   // https://webpack.js.org/configuration/externals/#function
@@ -37,5 +39,12 @@ module.exports = merge(baseConfig, {
   // `vue-ssr-server-bundle.json`
   plugins: [
     new VueSSRClientPlugin()
-  ]
+  ],
+
+  optimization: {
+    splitChunks: {
+      name: "manifest",
+       minChunks: Infinity
+    }
+  }
 })

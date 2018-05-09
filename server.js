@@ -10,33 +10,38 @@ const { createBundleRenderer } = require('vue-server-renderer')
 
 const app = express()
 
-const renderer = createBundleRenderer(
-  require('./dist/vue-ssr-server-bundle.json'),
+//const template = require('fs').readFileSync('./index.html', 'utf-8')
+const template = require('fs').readFileSync('./index.template.html', 'utf-8')
+const serverBundle = require('./dist/vue-ssr-server-bundle.json')
+const clientManifest = require('./dist/vue-ssr-client-manifest.json')
+
+
+/*const renderer = createBundleRenderer(
+  serverBundle,
   {
   	runInNewContext: true,
-    template: fs.readFileSync('./index.html', 'utf-8')
+    template,
+    clientManifest
   }
-)
-
+)*/
+const renderer = createBundleRenderer(serverBundle)
 
 app.get('*', (request, response) => {
 
 	const context = { url: request.url }
 
-	console.log(renderer)
 	renderer.renderToString(context, (err, html) => {
-		console.log(html)
-		console.log(err)
 	    if (err) {
 	        if (err.code === 404) {
 	          response.status(404).end('Page non trouvée')
 	        } else {
+	          console.log(err)
 	          response.status(500).end('Erreur interne du serveur')
 	        }
 	    } else {
 	        response.end(html)
 	    }
-  })
+  	})
 })
 
 app.listen(8080)
