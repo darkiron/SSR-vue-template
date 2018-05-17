@@ -11,7 +11,7 @@ const { createBundleRenderer } = require('vue-server-renderer')
 
 const app = express()
 
-app.use('/public', express.static('public'));
+app.use(express.static('public'));
 app.use('/dist', express.static('dist'));
 
 // const template = require('fs').readFileSync('./index.html', 'utf-8')

@@ -26,12 +26,13 @@ module.exports = merge(baseConfig, {
   // https://github.com/liady/webpack-node-externals
   // Externalise les dépendances de l'application. Cela rend le build serveur plus rapide
   // et génère un fichier de paquetage plus petit.
-  externals: nodeExternals({
+  /*externals: nodeExternals({
+    target: 'web',
     // ne pas externaliser les dépendances qui ont besoin d'être traitées par webpack.
     // vous pouvez ajouter plus de types de fichiers ici, comme par ex. avec les fichiers `*.vue`
     // vous devriez aussi lister des exceptions qui modifient `global` (par ex. les polyfills)
-    whitelist: /\.css$/
-  }),
+    whitelist: /\.css$/,
+  }),*/
 
   // Ceci est le plugin qui va créer entièrement la sortie pour le build serveur
   // dans un seul fichier JSON. Le fichier généré par défaut va être
@@ -56,5 +57,4 @@ module.exports = merge(baseConfig, {
         }
       }
     }
-  
 })
