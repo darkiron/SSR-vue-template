@@ -1,7 +1,8 @@
-
+const path = require('path')
 const express = require('express')
 const Vue = require('vue')
 const fs = require('fs')
+const resolve = file => path.resolve(__dirname, file)
 
 const { createBundleRenderer } = require('vue-server-renderer')
 
@@ -9,6 +10,9 @@ const { createBundleRenderer } = require('vue-server-renderer')
  //const appVue = require('./dist/index.js')
 
 const app = express()
+
+app.use('/public', express.static('public'));
+app.use('/dist', express.static('dist'));
 
 // const template = require('fs').readFileSync('./index.html', 'utf-8')
 const template = require('fs').readFileSync('./index.template.html', 'utf-8')
@@ -24,7 +28,7 @@ const clientManifest = require('./dist/vue-ssr-client-manifest.json')
     clientManifest
   }
 )*/
-const renderer = createBundleRenderer(serverBundle, { template })
+const renderer = createBundleRenderer(serverBundle, { template, clientManifest, basedir: resolve('./dist') })
 
 app.get('*', (request, response) => {
 

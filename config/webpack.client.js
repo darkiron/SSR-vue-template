@@ -12,14 +12,13 @@ module.exports = merge(baseConfig, {
   // Cela permet à webpack de gérer les imports dynamiques d'une manière
   // approprié pour Node.js, et dit également à `vue-loader` d'émettre un code approprié pour le serveur
   // lors de la compilation du composant Vue.
-  target: 'node',
+  target: 'web',
 
   // Pour le support des sources maps des paquetages
   devtool: 'source-map',
 
   // Cela dit au paquetage serveur d'utiliser les exports au format Node.js
   output: {
-    libraryTarget: 'commonjs2',
     filename: 'es5_client_entry.js'
   },
 
@@ -46,9 +45,16 @@ module.exports = merge(baseConfig, {
   ],
 
   optimization: {
-    splitChunks: {
-      name: "manifest",
-       minChunks: Infinity
+      splitChunks: {
+        name: true,
+        cacheGroups: {
+            commons: {
+                test: /[\\/]node_modules[\\/]/,
+                name: "manifest",
+                chunks: "all"
+            }
+        }
+      }
     }
-  }
+  
 })

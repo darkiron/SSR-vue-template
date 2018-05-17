@@ -16,6 +16,9 @@
 		},
 		created () {
 			this.name = this.$route.params.name
+			if (process.env.VUE_ENV === 'client') {
+				console.log('client')
+			}
 		},
 		asyncData ({ store, route }) {
 		   // retourner la Promesse depuis l'action

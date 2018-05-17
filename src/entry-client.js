@@ -24,6 +24,8 @@ router.onReady(
 				return next()
 			}
 
+			console.log('client')
+
 			//indicateur de chargement ici
 
 			Promise.all(activated.map( c => {
