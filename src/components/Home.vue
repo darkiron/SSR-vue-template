@@ -1,48 +1,32 @@
 <template>
-	<div><h1>FOO</h1></div>
+	<div class="content">
+		Vue and server side randering are beautiful :) 
+	</div>
 </template>
 <script>
 	export default {
 		name:'home',
 		title () {
-				return 'smell like ...'
+			return 'SSR with vueJS'
+		},
+		meta () {
+			return {
+				title: 'SSR with vueJS',
+				description: 'SSR with vuejs is a live demo of server side rendering, perfoming withe js framework vue'
+			}
 		},
 		methods: {
-			getContainer () {
-		        if (document.getElementById('toast-container') !== null) {
-		          return document.getElementById('toast-container')
-		        } else {
-		          let container = document.createElement('div')
-		          container.id = 'toast-container'
-		          document.body.prepend(container)
-
-		          return container
-		        }
-	      }
 		},
 		mounted () {
-
-			console.log(this)
-
-			// let container = this.getContainer()
-
-   //      	if (options.position !== undefined) {
-   //        		container.className = 'toto'
-   //      	}
-
-   //      	let toastChild = document.createElement('div')
-   //      	toastChild.className = 'toast'
-
-   //      	let toastMessage = document.createElement('div')
-   //      	toastMessage.innerHTML = 'from out there'
-   //      	toastMessage.className = 'toast-message'
-
-   //      	toastChild.appendChild(toastMessage)
-   //      	container.appendChild(toastChild)
-
-   //      	setTimeout(() => {
-   //        		container.removeChild(toastChild)
-   //      	}, 5000)
 		}
 	}
 </script>
+<style>
+	.content{
+			background: #FF5722;
+		    width: 50%;
+		    text-align: center;
+		    padding: .5rem;
+		    color: #ffffff;
+		}
+</style>

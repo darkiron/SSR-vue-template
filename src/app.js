@@ -4,8 +4,10 @@ import { createRouter } from './router'
 import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
 import titleMixin from './Utils/title-mixin'
+import metaMixin from './Utils/meta-mixin'
 
 Vue.mixin(titleMixin)
+Vue.mixin(metaMixin)
 
 export function createApp () {
 	const router = createRouter()

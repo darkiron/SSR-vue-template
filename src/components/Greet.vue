@@ -1,10 +1,11 @@
 <template>
-	<div>
-		Hello {{ name }}
+	<div class="content">
+		This is  {{ name }} !
 	</div>
 </template>
 <script>
 	export default {
+		name: 'about',
 		data () {
 			return {
 				name: '',
@@ -14,10 +15,13 @@
 		title () {
 		    return 'foo fighter'
 		},
+		meta () {
+			return {}
+		},
 		created () {
 			this.name = this.$route.params.name
 			if (process.env.VUE_ENV === 'client') {
-				console.log('client')
+				// console.log('client')
 			}
 		},
 		asyncData ({ store, route }) {
@@ -33,3 +37,12 @@
 		}
 	}
 </script>
+<style>
+	.content{
+		background: #FF5722;
+	    width: 50%;
+	    text-align: center;
+	    padding: .5rem;
+	    color: #ffffff;
+	}
+</style>
