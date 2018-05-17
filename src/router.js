@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from './components/Home.vue'
-import Greet from './components/Greet.vue'
+import Home from './Components/Home.vue'
+import Greet from './Components/Greet.vue'
 
 Vue.use(Router)
 
