@@ -1,7 +1,7 @@
 # SSR Vue JS app boilerplate
 
 **Install the app :** 
-Run npm install : 'npm i'
+Run npm install : `npm i`
 
 **Build /dist files :**
 Lunch webpack :`npm run dev`
