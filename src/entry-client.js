@@ -6,8 +6,6 @@ if (window.__INITIAL_STATE__) {
 	store.replaceState(window.__INITIAL_STATE__)
 }
 
-//app.$mount('#app')
-
 router.onReady(
 	() => {
 		router.beforeResolve((to, from, next) => {
@@ -23,8 +21,6 @@ router.onReady(
 			if (!activated.length) {
 				return next()
 			}
-
-			console.log('client')
 
 			//indicateur de chargement ici
 

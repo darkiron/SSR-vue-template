@@ -11,6 +11,7 @@ function getMeta (vm) {
 const serverMetaMixin = {
 	created () {
 		const meta = getMeta(this)
+		console.log(meta)
 
 		if (meta) {
 			this.$ssrContext.meta = meta
@@ -21,7 +22,8 @@ const serverMetaMixin = {
 const clientMetaMixin = {
 	mounted () {
 		const meta = getMeta(this)
-
+		console.log(meta)
+		
 		if (meta) {
 			document.title = meta
 		}

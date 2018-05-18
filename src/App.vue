@@ -13,7 +13,7 @@
 </template>
 <script>
 	export default {
-		name: 'main'
+		name: 'app'
 	}
 </script>
 <style>

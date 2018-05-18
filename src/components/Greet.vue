@@ -8,15 +8,15 @@
 		name: 'about',
 		data () {
 			return {
-				name: '',
+				name: 'toto',
 				// title: 'Hello mon Vincent'
 			}
 		},
-		title () {
-		    return 'foo fighter'
-		},
 		meta () {
-			return {}
+			return {
+				title: 'About VueJS and SSR',
+				description: 'Discover the server side rendering with live demo'
+			}
 		},
 		created () {
 			this.name = this.$route.params.name
