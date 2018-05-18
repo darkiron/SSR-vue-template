@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const Vue = require('vue')
 const fs = require('fs')
+const robots = require('express-robots-txt')
 const resolve = file => path.resolve(__dirname, file)
 
 const { createBundleRenderer } = require('vue-server-renderer')
@@ -13,6 +14,9 @@ const app = express()
 
 app.use(express.static('public'));
 app.use('/dist', express.static('dist'));
+
+app.use(robots(__dirname + '/public/robots.txt'));
+
 
 // const template = require('fs').readFileSync('./index.html', 'utf-8')
 const template = require('fs').readFileSync('./index.template.html', 'utf-8')
@@ -30,9 +34,11 @@ const clientManifest = require('./dist/vue-ssr-client-manifest.json')
 )*/
 const renderer = createBundleRenderer(serverBundle, { template, clientManifest, basedir: resolve('./dist') })
 
+
 app.get('*', (request, response) => {
 
 	const context = { url: request.url }
+
 
 	renderer.renderToString(context, (err, html) => {
 	    if (err) {
