@@ -1,6 +1,10 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const dev = process.env.NODE_ENV === "dev"
+
+const isProd = process.env.NODE_ENV === 'prod'
+
 
 module.exports = {
 	mode: dev,
@@ -29,5 +33,9 @@ module.exports = {
 		]
 	},
 	mode: 'development',
-	devtool: '#eval-source-map'
+	devtool: '#eval-source-map', 
+	plugins: isProd ?[
+	    new UglifyJsPlugin() 
+	]
+	: []
 }

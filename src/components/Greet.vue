@@ -39,10 +39,8 @@
 </script>
 <style>
 	.content{
-		background: #FF5722;
 	    width: 50%;
 	    text-align: center;
 	    padding: .5rem;
-	    color: #ffffff;
 	}
 </style>
