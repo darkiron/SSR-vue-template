@@ -5,8 +5,8 @@ import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
 import metaMixin from './Utils/meta-mixin'
 
-
 Vue.mixin(metaMixin)
+
 
 export function createApp () {
 	const router = createRouter()
@@ -20,6 +20,10 @@ export function createApp () {
 		store,
 		render: h => h(App)
 	})
+
+	if(process.env.VUE_ENV === 'client' && 'serviceWorker' in navigator) {
+	    navigator.serviceWorker.register('../dist/service-worker.js');
+	}
 
 	return { app, router, store }
 }

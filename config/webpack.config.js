@@ -1,13 +1,30 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
-const dev = process.env.NODE_ENV === "dev"
-
+const isDev = process.env.NODE_ENV === "dev"
 const isProd = process.env.NODE_ENV === 'prod'
+
+const plugins = []
+
+if(isProd){
+	plugins.push(new UglifyJsPlugin())
+}
+
+plugins.push(new SWPrecacheWebpackPlugin(
+	{
+        cacheId: 'w-test',
+        dontCacheBustUrlsMatching: /\.\w{8}\./,
+        filename: 'service-worker.js',
+        minify: isDev,
+        navigateFallback: 'http://localhost:8080/',
+        staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    })
+)
 
 
 module.exports = {
-	mode: dev,
+	mode: isDev,
 	output: {
 		path: path.resolve(__dirname, '../dist'),
 		// filename: '[name].[chunkhash].js'
@@ -18,7 +35,7 @@ module.exports = {
 	      'public': path.resolve(__dirname, '../public')
 	    }
 	  },
-	watch: dev,
+	watch: isDev,
 	module: {
 		rules: [
 			{
@@ -34,8 +51,5 @@ module.exports = {
 	},
 	mode: 'development',
 	devtool: '#eval-source-map', 
-	plugins: isProd ?[
-	    new UglifyJsPlugin() 
-	]
-	: []
+	plugins: plugins
 }
