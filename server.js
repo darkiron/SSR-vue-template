@@ -1,32 +1,57 @@
-#!/usr/bin/env node
+const path = require('path')
+const express = require('express')
+const Vue = require('vue')
+const fs = require('fs')
+const robots = require('express-robots-txt')
+const resolve = file => path.resolve(__dirname, file)
 
-const fs = require('fs');
-const express = require('express');
-const { createBundleRenderer } = require('vue-server-renderer');
+const { createBundleRenderer } = require('vue-server-renderer')
 
-const bundleRenderer = createBundleRenderer(
-  // Load the SSR bundle with require.
-  require('./dist/vue-ssr-bundle.json'),
-  {
-    // Yes, I know, readFileSync is bad practice. It's just shorter to read here.
-    template: fs.readFileSync('./index.html', 'utf-8')
-  }
-);
+ //const appVue = require('./src/App')
+ //const appVue = require('./dist/index.js')
 
-// Create the express app.
-const app = express();
+const app = express()
 
-// Serve static assets from ./dist on the /dist route.
+app.use(express.static('public'));
 app.use('/dist', express.static('dist'));
 
-// Render all other routes with the bundleRenderer.
-app.get('*', (req, res) => {
-  bundleRenderer
-    // Renders directly to the response stream.
-    // The argument is passed as "context" to main.server.js in the SSR bundle.
-    .renderToStream({url: req.path})
-    .pipe(res);
-});
+app.use(robots(__dirname + '/public/robots.txt'));
 
-// Bind the app to this port.
-app.listen(8080);
+
+// const template = require('fs').readFileSync('./index.html', 'utf-8')
+const template = require('fs').readFileSync('./index.template.html', 'utf-8')
+const serverBundle = require('./dist/vue-ssr-server-bundle.json')
+const clientManifest = require('./dist/vue-ssr-client-manifest.json')
+
+
+/*const renderer = createBundleRenderer(
+  serverBundle,
+  {
+  	runInNewContext: true,
+    template,
+    clientManifest
+  }
+)*/
+const renderer = createBundleRenderer(serverBundle, { template, clientManifest, basedir: resolve('./dist') })
+
+
+app.get('*', (request, response) => {
+
+	const context = { url: request.url }
+
+
+	renderer.renderToString(context, (err, html) => {
+	    if (err) {
+	        if (err.code === 404) {
+	          response.status(404).end('Page non trouvée')
+	        } else {
+	          console.log(err)
+	          response.status(500).end('Erreur interne du serveur')
+	        }
+	    } else {
+	        response.end(html)
+	    }
+  	})
+})
+
+app.listen(8080)

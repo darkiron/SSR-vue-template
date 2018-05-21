@@ -1,0 +1,12 @@
+{
+	"articles": [
+		{
+			"title": "Why SSR ?", 
+			"description": "SSR make your JS app optimized for SEO"
+		},
+		{
+			"title": "Some tricks with VUE fro SSR", 
+			"description": "You need to look github repository of vue-hackernews, It was so instructive"
+		}
+	]
+}
