@@ -14,11 +14,24 @@ if(isProd){
 plugins.push(new SWPrecacheWebpackPlugin(
 	{
         cacheId: 'w-test',
-        dontCacheBustUrlsMatching: /\.\w{8}\./,
+        // dontCacheBustUrlsMatching: /\.\w{8}\./,
         filename: 'service-worker.js',
         minify: isDev,
-        navigateFallback: 'http://localhost:8080/',
-        staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+        navigateFallback: '/',
+        //staticFileGlobsIgnorePatterns: [/\.map$/, /manifest\.json$/],
+      	dontCacheBustUrlsMatching: /./,
+      	staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
+		runtimeCaching: [
+			{
+				urlPattern: '/',
+				handler: 'networkFirst'
+			},
+			{
+				urlPattern: '/:name',
+				handler: 'networkFirst'
+			}
+		]
+
     })
 )
 

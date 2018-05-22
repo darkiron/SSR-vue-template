@@ -22,7 +22,9 @@ export function createApp () {
 	})
 
 	if(process.env.VUE_ENV === 'client' && 'serviceWorker' in navigator) {
-	    navigator.serviceWorker.register('../dist/service-worker.js');
+	    navigator.serviceWorker.register('../dist/service-worker.js').then( reg => {
+	    	var installingWorker = reg.installing;
+	    })
 	}
 
 	return { app, router, store }
