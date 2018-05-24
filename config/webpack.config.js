@@ -1,6 +1,7 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const glob = require('glob');
 
 const isDev = process.env.NODE_ENV === "dev"
 const isProd = process.env.NODE_ENV === 'prod'
@@ -11,29 +12,43 @@ if(isProd){
 	plugins.push(new UglifyJsPlugin())
 }
 
+const rootDir = '.'
+
 plugins.push(new SWPrecacheWebpackPlugin(
 	{
         cacheId: 'w-test',
-        // dontCacheBustUrlsMatching: /\.\w{8}\./,
         filename: 'service-worker.js',
-        minify: isDev,
-        navigateFallback: '/',
-        //staticFileGlobsIgnorePatterns: [/\.map$/, /manifest\.json$/],
-      	dontCacheBustUrlsMatching: /./,
-      	staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
-		runtimeCaching: [
-			{
-				urlPattern: '/',
-				handler: 'networkFirst'
-			},
-			{
-				urlPattern: '/:name',
-				handler: 'networkFirst'
-			}
-		]
-
+        navigateFallback: ':8080/',
+      	// staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
+      	staticFileGlobsIgnorePatterns: [/webpack\.+\.js/],
+      	staticFileGlobs: [
+      	   rootDir + '/dist/*.{js, html, png, txt, json}',
+      	   rootDir + '/publicjs, html, png, txt, json}',
+      	   rootDir + '/*.{js, html, png, txt, json}'
+		],
+		stripPrefix: rootDir,
     })
 )
+
+// /*
+// gulp.task('generate-service-worker', function(callback) {
+//     var swPrecache = require('sw-precache');
+//     var rootDir = 'public';
+
+//     swPrecache.write(`${rootDir}/service-worker.js`, {
+//         staticFileGlobs: [
+//             rootDir + '/build/**/*.{js,css}',
+//             rootDir + '/img/**/*.{jpg,png,svg}'
+//         ],
+//         dynamicUrlToDependencies: {
+//             '/': ['resources/views/master.blade.php', 'resources/views/index.blade.php']
+//         },
+//         navigateFallback: '/',
+//         stripPrefix: rootDir
+//     }, callback);
+// });
+
+// */
 
 
 module.exports = {

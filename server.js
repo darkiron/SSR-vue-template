@@ -16,6 +16,8 @@ app.use(express.static('public'));
 app.use('/dist', express.static('dist'));
 
 app.use(robots(__dirname + '/public/robots.txt'));
+app.use('/manifest.json', express.static('./manifest.json'))
+app.use('/service-worker.js', express.static('./dist/service-worker.js'))
 
 
 // const template = require('fs').readFileSync('./index.html', 'utf-8')

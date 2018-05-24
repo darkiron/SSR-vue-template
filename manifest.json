@@ -3,7 +3,7 @@
   "name": "SSR Vue",
   "icons": [
     {
-      "src": "/public/logo.png",
+      "src": "/logo.png",
       "type": "image/png",
       "sizes": "512x512"
     },
@@ -14,7 +14,7 @@
     }
   ],
   "start_url": "/",
-  "background_color": "#ff5722",
+  "background_color": "#ff5700",
   "display": "standalone",
   "scope": "/",
   "theme_color": "#ff5722"

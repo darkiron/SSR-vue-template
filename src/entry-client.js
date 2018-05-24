@@ -38,3 +38,9 @@ router.onReady(
 		app.$mount('#app')
 	}
 )
+
+if('serviceWorker' in navigator) {
+	navigator.serviceWorker.register('/service-worker.js').then( reg => {
+	    var installingWorker = reg.installing;
+	})
+}
