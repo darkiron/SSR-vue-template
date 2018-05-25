@@ -18,15 +18,28 @@ plugins.push(new SWPrecacheWebpackPlugin(
 	{
         cacheId: 'w-test',
         filename: 'service-worker.js',
-        navigateFallback: ':8080/',
+        navigateFallback: '/',
       	// staticFileGlobsIgnorePatterns: [/\.map$/, /\.json$/],
-      	staticFileGlobsIgnorePatterns: [/webpack\.+\.js/],
+      	staticFileGlobsIgnorePatterns: [
+      		/\.js$/
+      	],
       	staticFileGlobs: [
-      	   rootDir + '/dist/*.{js, html, png, txt, json}',
-      	   rootDir + '/publicjs, html, png, txt, json}',
-      	   rootDir + '/*.{js, html, png, txt, json}'
+      	   rootDir + '/dist/es5_client_entry.js',
+      	   rootDir + '/dist/manifest.es5_client_entry.js',
+      	   rootDir + '/public/js, html, png, txt, json}',
+      	   rootDir + '/*.{html}'
 		],
 		stripPrefix: rootDir,
+		runtimeCaching: [
+        {
+          urlPattern: '/',
+          handler: 'networkFirst'
+        },
+         {
+          urlPattern: '/:name',
+          handler: 'networkFirst'
+        }
+      ]
     })
 )
 
