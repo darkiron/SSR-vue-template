@@ -6,9 +6,15 @@
 
 		<section>
 			<article v-for="(article, index) in articles" :key="index">
-				<h3>{{ article.title }}</h3>
+				<figure v-if="article.image">
+					<img :class="isSVG(article.image)" :src="article.image" alt=""/>
+					<figcaption> {{ crop(article.image) }}</figcaption>
+				</figure>
 				<div>
-					{{ article.description }}
+					<h3>{{ article.title }}</h3>
+					<div>
+						{{ article.description }}
+					</div>
 				</div>
 			</article>
 		</section>
@@ -30,12 +36,48 @@
 		meta () {
 			return {
 				title: 'SSR with vueJS',
-				description: 'SSR with vuejs is a live demo of server side rendering, perfoming withe js framework vue'
+				description: 'SSR with vuejs is a live demo of server side rendering, perfoming with js framework vue'
 			}
 		},
 		methods: {
+			isSVG (value) {
+				let regex = RegExp('\.svg$')
+				if (regex.test(value)) {
+					return 'back-svg'
+				}
+
+				return null
+			}, 
+
+			crop (value) {
+				if (process.env.VUE_ENV === 'client') {
+					var file = null;
+					const reader  = new FileReader();
+
+					reader.onload = e => {
+						console.log(e.target.result)
+						this.$emit("load", e.target.result)
+						return e.target.result
+					}
+
+					axios.get(value, {responseType:'blob'}).then(
+						response => {
+							console.log(response.data)
+							file = response.data
+						}
+					).catch( error => {
+						console.log(error)
+					})
+
+					console.log(file)
+					if (file){
+						reader.readAsDataURL(file);
+					}
+
+				}
+			}
 		},
-		mounted () {
+		beforeMount () {
 			axios.get('api.json').then(
 				response => {
 					this.articles = response.data.articles
@@ -46,7 +88,7 @@
 </script>
 <style>
 	.content{
-		    width: 50%;
+		    width: 75%;
 		    text-align: center;
 		    padding: .5rem;
 		    
@@ -54,5 +96,46 @@
 	.header{
 		background: #FF5722;
 		color: #ffffff;
+	}
+
+	section {
+		display: flex;
+    	flex-direction: row;
+    	flex-wrap: wrap;
+	}
+
+	article {
+	    width: 25%;
+	    min-height: 1rem;
+	    margin: 0 .2rem 2.5rem 0;
+	    padding: .5rem;
+	    flex-grow: 1;
+	    /*border: aqua solid 1px;*/
+	}
+
+	article:nth-child(3n+1){
+		width: 100%!important;
+	}
+
+	article:nth-child(3n+1) h3{
+		width: 100%!important;
+	}
+
+	figure {
+	    margin: 0;
+	    padding: .5rem;
+	    box-shadow: 6px 10px 20px 0px #2d2d2d47;
+	    /*display: inline-flex;*/
+	}
+
+	figure > img {
+	    width: 100%;
+	    object-fit: cover!important;
+	    object-position: center;
+	}
+
+	.back-svg {
+		background: #1d1d1d;
+    	padding: .5rem;
 	}
 </style>
