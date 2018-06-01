@@ -1,10 +1,11 @@
 const path = require('path')
 const express = require('express')
 const Vue = require('vue')
+//Crop & resize
+const sharp = require('sharp');
 const fs = require('fs')
 const robots = require('express-robots-txt')
 const resolve = file => path.resolve(__dirname, file)
-
 const { createBundleRenderer } = require('vue-server-renderer')
 
  //const appVue = require('./src/App')
@@ -35,6 +36,20 @@ const clientManifest = require('./dist/vue-ssr-client-manifest.json')
   }
 )*/
 const renderer = createBundleRenderer(serverBundle, { template, clientManifest, basedir: resolve('./dist') })
+
+app.get('/crop/:name/:width/:height/:format', (request, response) => {
+	const { name, width, height, format } = request.params; // Get the width and height from the request parameters
+	let path =`./public/${name}`
+
+	const readStream = fs.createReadStream(path);
+
+  	let file = sharp()
+	  	.resize(parseInt(width), parseInt(height))
+	  	.toFormat(`${format || 'jpg'}`)
+
+  	readStream.pipe(file).pipe(response)
+
+})
 
 
 app.get('*', (request, response) => {

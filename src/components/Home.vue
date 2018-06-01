@@ -7,8 +7,8 @@
 		<section>
 			<article v-for="(article, index) in articles" :key="index">
 				<figure v-if="article.image">
-					<img :class="isSVG(article.image)" :src="article.image" alt=""/>
-					<figcaption> {{ crop(article.image) }}</figcaption>
+					<img :class="isSVG(article.image)" :src="'/crop/' + article.image +'/600/350/jpg'" alt=""/>
+					<figcaption></figcaption>
 				</figure>
 				<div>
 					<h3>{{ article.title }}</h3>
@@ -48,34 +48,6 @@
 
 				return null
 			}, 
-
-			crop (value) {
-				if (process.env.VUE_ENV === 'client') {
-					var file = null;
-					const reader  = new FileReader();
-
-					reader.onload = e => {
-						console.log(e.target.result)
-						this.$emit("load", e.target.result)
-						return e.target.result
-					}
-
-					axios.get(value, {responseType:'blob'}).then(
-						response => {
-							console.log(response.data)
-							file = response.data
-						}
-					).catch( error => {
-						console.log(error)
-					})
-
-					console.log(file)
-					if (file){
-						reader.readAsDataURL(file);
-					}
-
-				}
-			}
 		},
 		beforeMount () {
 			axios.get('api.json').then(
