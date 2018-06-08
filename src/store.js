@@ -5,26 +5,41 @@ Vue.use(Vuex)
 
 // Supposons que nous ayons une API universelle retournant
 // des Promesses (« Promise ») et ignorons les détails de l'implémentation
-import { fetchItem } from './api'
+import { createApi } from './api'
 
 export function createStore () {
   return new Vuex.Store({
     state: {
-      items: {}
+      items: {},
+      title: ''
     },
     actions: {
-      fetchItem ({ commit }, id) {
-        // retournant la Promesse via `store.dispatch()`, nous savons
-        // quand les données ont été préchargées
-        return fetchItem(id).then(item => {
-          commit('setItem', { id, item })
+      fetchItems ({ commit }, url) {
+        return createApi(url).then(items => {
+          commit('setItems', { items })
         })
+      },
+      pushTitle ({ commit }, title) {
+        commit('setTitle', { title })
       }
+
     },
     mutations: {
-      setItem (state, { id, item }) {
-        Vue.set(state.items, id, item)
+      setItems (state, { items }) {
+        state.items = items
+      },
+      setTitle (state, { title }) {
+        state.title = title
       }
+    }, 
+    getters: {
+      getCurrent (state) {
+        if (state.items.length > 1) {
+          return state.items.find(item => { if (item.title === state.title) { return item} })
+        }
+        
+      }
+
     }
   })
 }

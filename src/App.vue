@@ -7,7 +7,9 @@
 				<router-link :to="{ name: 'greet', params: { name: 'ssr' } }"> About </router-link>
 			</nav>
 		</main>
-		<router-view></router-view>
+		<transition name="component-fade" mode="out-in">
+			<router-view></router-view>
+		</transition>
 	</div>
 </template>
 <script>
@@ -21,11 +23,12 @@
 		/*min-height:100%;*/
 		display:flex;
 		flex-direction: column;
-		font-family: 'Raleway', sans-serif;
+		font-family: 'Helvetica', sans-serif;
 		align-items:center;
 		justify-content:center;
 		margin: 0;
 	}
+
 	#app{
 		width: 100%;
 	    height: 100%;
@@ -33,13 +36,38 @@
 	    align-items: center;
 	    flex-direction: column;
 	}
-	nav a{
-		margin: .5rem;
-		color: red;
-		text-decoration: none;
+
+	h1 {
+		text-shadow: 0.5px 0.5px 0px #ff5724;
 	}
 
-	nav, main{
+	main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		padding: .5rem 0;
+		background: #1d1d1d;;
+		color: #fff;
+	}
+
+	nav a{
+		margin: .5rem;
+	    text-decoration: none;
+	    color: #898989;
+	    text-transform: uppercase;
+	    font-size: .8rem;
+	    font-weight: 600;
+	    font-family: sans-serif;
+	    letter-spacing: 1px;
+	    transition: all ease 1s;
+	}
+
+	nav a:hover{
+		color: #ff5723;
+	}
+
+	nav{
 		margin: .5rem 0;
 	}
 
@@ -52,7 +80,9 @@
 	    width: 100%;
 	    padding: 1em;
 	    background-color: #1d1d1d;
-	    color: #ff5723;
+	    font-weight: lighter;
+    	font-size: small;
+    	color: #d6d6d6;
 	}
 
 	footer > .container{
@@ -110,6 +140,13 @@
 		width: -0px;
 		transition: all 200ms linear;
 		margin: 0px;
+	}
+
+	.component-fade-enter-active, .component-fade-leave-active {
+	  transition: opacity .3s ease;
+	}
+	.component-fade-enter, .component-fade-leave-to{
+	  opacity: 0;
 	}
 
 </style>

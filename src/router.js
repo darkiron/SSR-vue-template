@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from './Components/Home.vue'
 import Greet from './Components/Greet.vue'
+import Article from './Components/Article.vue'
 
 Vue.use(Router)
 
@@ -14,6 +15,7 @@ export function createRouter () {
     	{ path: '/', name: 'home', component: Home },
     	// { path: '/:name', name: 'greet', component: () => require('./components/Greet.vue') },
     	{ path: '/:name', name: 'greet', component: Greet },
+    	{ path: '/article/:name', name: 'article', component: Article },
     ]
   })
 }

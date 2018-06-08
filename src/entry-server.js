@@ -21,7 +21,7 @@ export default context => {
 
 				Promise.all(matchedComponents.map(
 					component => {
-						if(component.asyncData){
+						if(component.asyncData) {
 							return component.asyncData({
 								store, 
 								route: router.currentRoute

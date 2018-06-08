@@ -6,16 +6,14 @@
 
 		<section>
 			<article v-for="(article, index) in articles" :key="index">
-				<figure v-if="article.image">
-					<img :class="isSVG(article.image)" :src="'/crop/' + article.image +'/600/350/jpg'" alt=""/>
-					<figcaption></figcaption>
-				</figure>
+				<img v-if="article.image" :class="isSVG(article.image)" :src="'/crop/' + article.image +'/'+ size(index) +'/350/jpg'" alt="" ref="image"/>
 				<div>
 					<h3>{{ article.title }}</h3>
 					<div>
 						{{ article.description }}
 					</div>
 				</div>
+				<router-link :to="{ name: 'article', params: { name: article.title } }"></router-link>
 			</article>
 		</section>
 	</div>
@@ -47,7 +45,17 @@
 				}
 
 				return null
-			}, 
+			},
+
+			size (index) {
+				let size = 700
+				this.$nextTick(() => {
+					let img = this.$refs.image[index]
+					size = img.width
+				})
+					
+				return size
+			} 
 		},
 		beforeMount () {
 			axios.get('api.json').then(
@@ -55,7 +63,7 @@
 					this.articles = response.data.articles
 				}
 			)
-		}
+		}, 
 	}
 </script>
 <style>
@@ -79,10 +87,19 @@
 	article {
 	    width: 25%;
 	    min-height: 1rem;
-	    margin: 0 .2rem 2.5rem 0;
+	    margin: 0 0 4rem 0;
 	    padding: .5rem;
 	    flex-grow: 1;
-	    /*border: aqua solid 1px;*/
+	    position: relative;
+	}
+
+	article > a {
+		position: absolute;
+	    top: 0;
+	    left: 0;
+	    right: 0;
+	    bottom: 0;
+	    z-index: 1;
 	}
 
 	article:nth-child(3n+1){
@@ -93,17 +110,10 @@
 		width: 100%!important;
 	}
 
-	figure {
-	    margin: 0;
-	    padding: .5rem;
-	    box-shadow: 6px 10px 20px 0px #2d2d2d47;
-	    /*display: inline-flex;*/
-	}
-
-	figure > img {
-	    width: 100%;
-	    object-fit: cover!important;
-	    object-position: center;
+	article img {
+		width: 100%;
+	    display: inline-block;
+	    box-shadow: 8px 6px 20px rgba(0, 0, 0, .36);
 	}
 
 	.back-svg {
