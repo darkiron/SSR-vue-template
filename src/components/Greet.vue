@@ -10,6 +10,10 @@
 			return {
 				name: 'toto',
 				// title: 'Hello mon Vincent'
+				meta: {
+					title: 'About VueJS and SSR',
+					description: 'Discover the server side rendering with live demo'
+				}
 			}
 		},
 		meta () {

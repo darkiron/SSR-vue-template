@@ -35,7 +35,8 @@ export function createStore () {
     getters: {
       getCurrent (state) {
         if (state.items.length > 1) {
-          return state.items.find(item => { if (item.title === state.title) { return item} })
+          let item = state.items.find(item => { if (item.title === state.title) { return item} })
+          return item;
         }
         
       }

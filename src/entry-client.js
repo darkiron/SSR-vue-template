@@ -9,7 +9,6 @@ document.body.appendChild(bar.$el)
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
   beforeRouteUpdate (to, from, next) {
-  	console.log('test')
     const { asyncData } = this.$options
     if (asyncData) {
       asyncData({
@@ -40,13 +39,9 @@ router.onReady(
 				return diffed || (diffed = (prevMatched[i] !== c))
 			})
 
-			/*
-			if (!activated.length) {
-				return next()
-			}
-			*/
 
 			const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _)
+			
 		    if (!asyncDataHooks.length) {
 		      return next()
 		    }
@@ -61,22 +56,6 @@ router.onReady(
 			    next()
 			}).catch(next)
 
-			/*
-			Promise.all(activated.map( 
-				c => {
-					if (c.asyncData) {
-						console.log('foo')
-						return c.asyncData({ 
-							store, 
-							route: to 
-						})
-					}
-				})).then( () => {
-				// arret du chargment
-				bar.stop()
-				next()
-			}).catch(next)
-			*/
 		})
 
 		app.$mount('#app')
