@@ -1,5 +1,6 @@
 const path = require('path')
 const express = require('express')
+const compression = require('compression')
 const Vue = require('vue')
 //Crop & resize
 const sharp = require('sharp');
@@ -15,6 +16,7 @@ const app = express()
 
 app.use(express.static('public'));
 app.use('/dist', express.static('dist'));
+app.use(compression())
 
 app.use(robots(__dirname + '/public/robots.txt'));
 app.use('/manifest.json', express.static('./manifest.json'))
@@ -43,6 +45,8 @@ app.get('/crop/:name/:width/:height/:format', (request, response) => {
 
 	const readStream = fs.createReadStream(path);
 
+	response.set('Content-Type', `${format || 'jpg'}`)
+
   	let file = sharp()
 	  	.resize(parseInt(width), parseInt(height))
 	  	.toFormat(`${format || 'jpg'}`)
@@ -63,7 +67,7 @@ app.get('*', (request, response) => {
 	          response.status(404).end('Page non trouvée')
 	        } else {
 	          console.log(err)
-	          response.status(500).end('Erreur interne du serveur')
+	          response.status(500).end('Erreur interne du serveur: '+ err.message)
 	        }
 	    } else {
 	        response.end(html)

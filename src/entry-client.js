@@ -1,4 +1,25 @@
+import Vue from 'vue'
 import { createApp } from './app'
+import Progress from './Components/Progress.vue'
+
+// global progress bar
+const bar = Vue.prototype.$bar = new Vue(Progress).$mount()
+document.body.appendChild(bar.$el)
+
+// a global mixin that calls `asyncData` when a route component's params change
+Vue.mixin({
+  beforeRouteUpdate (to, from, next) {
+    const { asyncData } = this.$options
+    if (asyncData) {
+      asyncData({
+        store: this.$store,
+        route: to
+      }).then(next).catch(next)
+    } else {
+      next()
+    }
+  }
+})
 
 const { app, router, store } = createApp()
 
@@ -18,26 +39,29 @@ router.onReady(
 				return diffed || (diffed = (prevMatched[i] !== c))
 			})
 
-			if (!activated.length) {
-				return next()
-			}
+
+			const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _)
+			
+		    if (!asyncDataHooks.length) {
+		      return next()
+		    }
 
 			//indicateur de chargement ici
+			bar.start()
 
-			Promise.all(activated.map( c => {
-				if (c.asyncData) {
-					return c.asyncData({ store, route: to })
-				}
-			})).then( () => {
-				// arret du chargment
-
-				next()
+			Promise.all(
+				asyncDataHooks.map(hook => hook({ store, route: to }))
+			).then(() => {
+			    bar.stop()
+			    next()
 			}).catch(next)
+
 		})
 
 		app.$mount('#app')
 	}
 )
+
 
 if('serviceWorker' in navigator) {
 	navigator.serviceWorker.register('/service-worker.js').then( reg => {

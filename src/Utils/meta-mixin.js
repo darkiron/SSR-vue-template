@@ -1,11 +1,32 @@
 function getMeta (vm) {
 	const { meta } = vm.$options
-
 	if (meta) {
 		return typeof meta == 'function'
 		? meta.call(vm)
 		: meta
 	}
+}
+
+function setMeta (meta) {
+	let keys = Object.keys(meta)
+
+	let domMeta = document.getElementsByTagName('meta');
+
+	let og = RegExp('og')
+
+	keys.forEach( key => {
+		if (key != 'title' && !og.test(key)) {
+			domMeta[key].content = meta[key]
+		}
+		else {
+			for (var i = 0; i < domMeta.length; i++) {
+				if (domMeta[i].property == key) {
+					domMeta[i].content = meta[key]
+				}
+			}
+		}
+		
+	})
 }
 
 const serverMetaMixin = {
@@ -24,7 +45,8 @@ const clientMetaMixin = {
 		const meta = getMeta(this)
 
 		if (meta) {
-			document.meta = meta
+			document.title = meta.title
+			setMeta(meta)
 		}
 	}
 }
