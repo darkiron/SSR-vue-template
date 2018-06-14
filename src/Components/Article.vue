@@ -1,5 +1,15 @@
 <template>
-	<div>{{ getCurrent.description }}</div>
+	<section>
+			<article>
+				<img v-if="getCurrent.image" :src="'/crop/' + getCurrent.image +'/'+ '650' +'/350/jpg'" alt="" ref="image"/>
+				<div>
+					<h2>{{ getCurrent.title }}</h2>
+					<div>
+						{{ getCurrent.description }}
+					</div>
+				</div>
+			</article>
+		</section>
 </template>
 <script>
 	import Vuex from 'vuex'

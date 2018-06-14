@@ -74,8 +74,8 @@
 		    
 		}
 	.header{
-		background: #FF5722;
-		color: #ffffff;
+		background: #fff;
+		color: #ff5722;
 	}
 
 	section {
