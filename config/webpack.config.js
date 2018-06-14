@@ -1,6 +1,7 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const glob = require('glob');
 
 const isDev = process.env.NODE_ENV === "dev"
@@ -43,25 +44,7 @@ plugins.push(new SWPrecacheWebpackPlugin(
     })
 )
 
-// /*
-// gulp.task('generate-service-worker', function(callback) {
-//     var swPrecache = require('sw-precache');
-//     var rootDir = 'public';
-
-//     swPrecache.write(`${rootDir}/service-worker.js`, {
-//         staticFileGlobs: [
-//             rootDir + '/build/**/*.{js,css}',
-//             rootDir + '/img/**/*.{jpg,png,svg}'
-//         ],
-//         dynamicUrlToDependencies: {
-//             '/': ['resources/views/master.blade.php', 'resources/views/index.blade.php']
-//         },
-//         navigateFallback: '/',
-//         stripPrefix: rootDir
-//     }, callback);
-// });
-
-// */
+plugins.push(new ExtractTextPlugin({ filename: 'common.css' }))
 
 
 module.exports = {
@@ -81,16 +64,37 @@ module.exports = {
 		rules: [
 			{
 				test: /\.vue$/,
-				use: 'vue-loader'
+				loader: 'vue-loader',
+				options: {
+			        // enable CSS extraction
+			        extractCSS: true
+			    }
 			},
 			{
 				test: /\.js$/,
 				use: 'babel-loader',
 				exclude: /node_modules/
 			},
+			{
+        		test: /\.css$/,
+        		// important: use vue-style-loader instead of style-loader
+        		loader:'css-loader', 
+        		options: { 
+        			minimize: true 
+        		} 
+      		},
+      		{
+        		test: /\.scss$/,
+        		// important: use vue-style-loader instead of style-loader
+        		use: ExtractTextPlugin.extract({
+              		use: 'sass-loader',
+              		fallback: 'vue-style-loader'
+            	})
+ 
+      		}
 		]
 	},
-	mode: 'development',
+	mode: isDev ? 'development' : 'production',
 	devtool: '#eval-source-map', 
 	plugins: plugins
 }
