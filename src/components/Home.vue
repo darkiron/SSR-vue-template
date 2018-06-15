@@ -66,7 +66,7 @@
 		}, 
 	}
 </script>
-<style>
+<style lang="scss">
 	.content{
 		    width: 75%;
 		    text-align: center;
@@ -91,30 +91,31 @@
 	    padding: .5rem;
 	    flex-grow: 1;
 	    position: relative;
+
+	    a {
+			position: absolute;
+		    top: 0;
+		    left: 0;
+		    right: 0;
+		    bottom: 0;
+		    z-index: 1;
+		}
+
+		&:nth-child(3n+1){
+			width: 100%!important;
+		}
+
+		&:nth-child(3n+1) h3{
+			width: 100%!important;
+		}
+
+		img {
+			width: 100%;
+		    display: inline-block;
+		    box-shadow: 8px 6px 20px rgba(0, 0, 0, .36);
+		}
 	}
 
-	article > a {
-		position: absolute;
-	    top: 0;
-	    left: 0;
-	    right: 0;
-	    bottom: 0;
-	    z-index: 1;
-	}
-
-	article:nth-child(3n+1){
-		width: 100%!important;
-	}
-
-	article:nth-child(3n+1) h3{
-		width: 100%!important;
-	}
-
-	article img {
-		width: 100%;
-	    display: inline-block;
-	    box-shadow: 8px 6px 20px rgba(0, 0, 0, .36);
-	}
 
 	.back-svg {
 		background: #1d1d1d;

@@ -26,7 +26,7 @@
 			"image": "think.jpg"
 		},
 		{
-			"title": "Some tricks with VUE fro SSR", 
+			"title": "Some tricks with VUE for SSR", 
 			"description": "You need to look github repository of vue-hackernews, It was so instructive",
 			"image": "hack.jpg"
 		}

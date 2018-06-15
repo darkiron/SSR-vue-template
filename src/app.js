@@ -4,8 +4,10 @@ import { createRouter } from './router'
 import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
 import metaMixin from './Utils/meta-mixin'
+import filters from './Utils/filters'
 
 Vue.mixin(metaMixin)
+Vue.use(filters)
 
 
 export function createApp () {
