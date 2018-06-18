@@ -74,8 +74,7 @@
 		    
 		}
 	.header{
-		background: #fff;
-		color: #ff5722;
+		/*color: $color-orange;*/
 	}
 
 	section {
@@ -118,7 +117,7 @@
 
 
 	.back-svg {
-		background: #1d1d1d;
+		/*background: $color-black;*/
     	padding: .5rem;
 	}
 </style>
