@@ -5,8 +5,10 @@ import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
 import metaMixin from './Utils/meta-mixin'
 import filters from './Utils/filters'
+import raw from './Utils/raw'
 
 Vue.mixin(metaMixin)
+Vue.mixin(raw)
 Vue.use(filters)
 
 

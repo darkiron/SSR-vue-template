@@ -22,6 +22,9 @@
 	}
 </script>
 <style lang="scss">
+
+	@import '../Style/variables.scss';
+
 	.active {
 		display:flex!important;
 	}
@@ -45,8 +48,8 @@
 
 	.loader{
 		border-radius: 50%;
-	    /*border: 15px solid $color-white;*/
-    	border-top: 15px solid #e2e2e2bf;
+	    border: 15px solid $color-orange;
+    	border-top: 15px solid $color-grey;
 	    background: transparent;
 	    width: 100px;
 	    height: 100px;

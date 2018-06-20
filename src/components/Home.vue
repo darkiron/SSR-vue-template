@@ -85,7 +85,7 @@
     	flex-wrap: wrap;
 	}
 
-	article {
+	.content article {
 	    width: 25%;
 	    min-height: 1rem;
 	    margin: 0 0 4rem 0;

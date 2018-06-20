@@ -4,8 +4,7 @@
 				<img v-if="getCurrent.image" :src="'/crop/' + getCurrent.image +'/'+ '650' +'/350/jpg'" alt="" ref="image"/>
 				<div>
 					<h2>{{ getCurrent.title }}</h2>
-					<div>
-						{{ getCurrent.description }}
+					<div v-html="raw(getCurrent.description_longue)">
 					</div>
 				</div>
 			</article>
@@ -25,8 +24,10 @@
 
 		meta () {
 			return {
-				title: this.item.title,
-				description: this.item.description
+				'title': this.item.title,
+				'description': this.item.description,
+				'og:image': `/${this.item.ogimage}`,
+				'og:type': 'article'
 			}
 		},
 
@@ -39,4 +40,8 @@
 		},
 	}
 </script>
+<style lang="scss">
+	@import '../Style/variables.scss';
+	
+</style>
 
