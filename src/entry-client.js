@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { createApp } from './app'
+import { createApp } from './app.js'
 import Progress from './Components/Progress.vue'
 
 // global progress bar

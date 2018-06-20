@@ -13,7 +13,7 @@
 						{{ article.description }}
 					</div>
 				</div>
-				<router-link :to="{ name: 'article', params: { name: article.title|slugify } }"></router-link>
+				<router-link :to="{ name: 'article', params: { name: article.title } }"></router-link>
 			</article>
 		</section>
 	</div>
@@ -67,6 +67,8 @@
 	}
 </script>
 <style lang="scss">
+	@import '../Style/variables.scss';
+
 	.content{
 		    width: 75%;
 		    text-align: center;
@@ -74,7 +76,7 @@
 		    
 		}
 	.header{
-		/*color: $color-orange;*/
+		color: $color-orange;
 	}
 
 	section {
@@ -117,7 +119,7 @@
 
 
 	.back-svg {
-		/*background: $color-black;*/
+		background: $color-black;
     	padding: .5rem;
 	}
 </style>

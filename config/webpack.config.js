@@ -55,7 +55,7 @@ const scssLoader = [
     {
         loader: 'sass-loader',
         options: {
-        	//data: path.resolve(__dirname, '../src/Style/variables.scss'),
+        	  // data: path.resolve(__dirname, '../src/Style/variables.scss'),
             includePaths: [
                 'src/Style'
             ]

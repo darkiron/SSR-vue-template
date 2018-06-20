@@ -33,26 +33,25 @@
 </template>
 <script>
 	export default {
-		name: 'app'
+		name: 'apptoto'
 	}
 </script>
 
 <style lang="scss">
 
 	@import 'Style/style.css';
-	/*
 	@import 'Style/variables.scss';
-	*/
+	
 
 
 	body{
 		margin: 0;
 		width: 100%;
-		/*font-family: $font-text;*/
+		font-family: $font-text;
 	}
 
 	h1, h2, h3, h4, h5, h5 {
-		/*font-family: $font-title;*/
+		font-family: $font-title;
 		text-transform: uppercase;
 	    letter-spacing: 1px;
 	}
@@ -88,8 +87,8 @@
 	header, footer{
 		display: inherit;
 		flex-direction: column;
-		/*background: $color-black;
-		color: $color-white;*/
+		background: $color-black;
+		color: $color-white;
 	}
 
 	nav{ 
@@ -99,7 +98,7 @@
 		a{
 			margin: .5rem;
 		    text-decoration: none;
-		    /*color: $color-grey;*/
+		    color: $color-grey;
 		    text-transform: uppercase;
 		    font-size: .8rem;
 		    font-weight: 600;
@@ -108,7 +107,7 @@
 		    transition: all ease 1s;
 
 		    &:hover{
-				/*color: $color-orange;*/
+				color: $color-orange;
 			}
 		}
 	}
@@ -140,7 +139,7 @@
 			list-style: none;
 
 			a {
-				/*color: $color-orange;*/
+				color: $color-orange;
 				text-decoration: none;
 				display: inline-block;
 				border: 1px solid rgba(255, 87, 35, 0.43);
@@ -160,7 +159,7 @@
 					content : " ";
 					display: block;
 					float:left;
-					/*background: $color-orange;*/
+					background: $color-orange;
 					margin: 0 .5rem;
 					margin-left: 0px;
 					transition: all 200ms linear;
