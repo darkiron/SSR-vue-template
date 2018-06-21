@@ -1,5 +1,5 @@
 <template>
-	<section>
+	<section class="article">
 			<article>
 				<img v-if="getCurrent.image" :src="'/crop/' + getCurrent.image +'/'+ '650' +'/350/jpg'" alt="" ref="image"/>
 				<div>
@@ -18,7 +18,7 @@
 
 		asyncData ({ store, route }) {
 		   	let data = store.dispatch('fetchItems', 'http://localhost:8080/api.json')
-		   	store.dispatch('pushTitle', route.params.name)
+		   	store.dispatch('pushTitle', route.params.slug)
 		   	return data
 		},
 
@@ -42,6 +42,10 @@
 </script>
 <style lang="scss">
 	@import '../Style/variables.scss';
+
+	.article{
+		width: 50%;
+	}
 	
 </style>
 

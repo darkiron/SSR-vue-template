@@ -13,7 +13,7 @@
 						{{ article.description }}
 					</div>
 				</div>
-				<router-link :to="{ name: 'article', params: { name: article.title } }"></router-link>
+				<router-link :to="{ name: 'article', params: { slug: (article.slug)?article.slug:slugify(article.title) } }"></router-link>
 			</article>
 		</section>
 	</div>

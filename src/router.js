@@ -15,7 +15,7 @@ export function createRouter () {
     	{ path: '/', name: 'home', component: Home },
     	// { path: '/:name', name: 'greet', component: () => require('./components/Greet.vue') },
     	{ path: '/:name', name: 'greet', component: Greet },
-    	{ path: '/article/:name', name: 'article', component: Article },
+    	{ path: '/blog/:slug', name: 'article', component: Article },
     ]
   })
 }

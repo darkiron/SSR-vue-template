@@ -64,6 +64,8 @@ app.get('*', (request, response) => {
 	renderer.renderToString(context, (err, html) => {
 	    if (err) {
 	        if (err.code === 404) {
+	          //response.status(404).end('Page non trouvée')
+	          console.log(html)
 	          response.status(404).end('Page non trouvée')
 	        } else {
 	          console.log(err)
