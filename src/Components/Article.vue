@@ -45,6 +45,13 @@
 
 	.article{
 		width: 50%;
+
+		article{
+			margin-top: 5rem;
+			margin-left:auto;
+			margin-right: auto;
+			text-align:center;
+		}
 	}
 	
 </style>

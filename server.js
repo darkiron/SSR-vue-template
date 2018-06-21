@@ -66,7 +66,7 @@ app.get('*', (request, response) => {
 	        if (err.code === 404) {
 	          //response.status(404).end('Page non trouvée')
 	          console.log(html)
-	          response.status(404).end('Page non trouvée')
+	          response.status(404).end(require('fs').readFileSync('./404.html', 'utf-8'))
 	        } else {
 	          console.log(err)
 	          response.status(500).end('Erreur interne du serveur: '+ err.message)
