@@ -3,32 +3,44 @@
 		{
 			"title": "Why SSR ?", 
 			"description": "SSR make your JS app optimized for SEO",
-			"image": "internet.jpg"
+			"description_longue": "You would create website only with vue, fully referenced in Google? You need tuse server side rendering (ssr). Why SSR work ? your js script was pre-compiled by the server and inject directly in the html. SSR is fast, your app is directly charged on the demande. How to add SSR in my app ? you need to entry point : [the server side](/article/Server%20entry) and [the client side](/blog/client-entry)",
+			"image": "internet.jpg",
+			"ogimage": "internet.jpg"
 		},
 		{
 			"title": "Server entry", 
-			"description": "SSR make your JS app optimized for SEO",
-			"image": "server.jpg"
+			"description": "Generate your app before mount",
+			"description_longue": "It's the file who use by server to generate and prerender your app. Server-entry generate full html app and render metadatas use by search engine.",
+			"image": "server.jpg",
+			"ogimage": "server.jpg"
 		},
 		{
 			"title": "Client entry", 
-			"description": "SSR make your JS app optimized for SEO",
-			"image": "client.jpg"
+			"description": "run your app engine",
+			"description_longue": "After SSR, it client-side to the the controll of the app, make the app server-less.",
+			"image": "client.jpg",
+			"ogimage": "client.jpg"
 		},
 		{
 			"title": "Create your webpack configuration", 
 			"description": "You need to compile your code differently way for server-side and the client side",
-			"image": "webpack.svg"
+			"description_longue": "You need to compile your code differently way for server-side and the client side. You need to create (see previously) server entry and client entry.",
+			"image": "webpack.svg",
+			"ogimage": "webpack.svg"
 		},
 		{
 			"title": "Thinks server-side !", 
-			"description": "You need to adpte your component for the server side rendering",
-			"image": "think.jpg"
+			"description": "You need to adapte your component for the server side rendering",
+			"description_longue": "You need to adapte your component for the server side rendering. In server side you don't have window dom!",
+			"image": "think.jpg",
+			"ogimage": "think.jpg"
 		},
 		{
-			"title": "Some tricks with VUE fro SSR", 
+			"title": "Some tricks with VUE for SSR", 
 			"description": "You need to look github repository of vue-hackernews, It was so instructive",
-			"image": "hack.jpg"
+			"description_longue": "You need to look github repository of vue-hackernews, It was so instructive",
+			"image": "hack.jpg",
+			"ogimage": "hack.jpg"
 		}
 	]
 }

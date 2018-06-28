@@ -2,12 +2,14 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const glob = require('glob');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 const isDev = process.env.NODE_ENV === "dev"
 const isProd = process.env.NODE_ENV === 'prod'
 
 const plugins = []
+
+plugins.push(new VueLoaderPlugin())
 
 if(isProd){
 	plugins.push(new UglifyJsPlugin())
@@ -46,6 +48,20 @@ plugins.push(new SWPrecacheWebpackPlugin(
 
 plugins.push(new ExtractTextPlugin({ filename: 'common.css' }))
 
+const scssLoader = [
+	{
+        loader: 'css-loader'
+    },
+    {
+        loader: 'sass-loader',
+        options: {
+        	  // data: path.resolve(__dirname, '../src/Style/variables.scss'),
+            includePaths: [
+                'src/Style'
+            ]
+        }
+    }
+]
 
 module.exports = {
 	mode: isDev,
@@ -56,9 +72,11 @@ module.exports = {
 	},
 	resolve: {
 	    alias: {
-	      'public': path.resolve(__dirname, '../public')
-	    }
-	  },
+	      'public': path.resolve(__dirname, '../public'),
+	      'style': path.resolve(__dirname, '../src/Style')
+	    },
+	    extensions: ['.ts', '.vue', '.js']
+	},
 	watch: isDev,
 	module: {
 		rules: [
@@ -85,12 +103,10 @@ module.exports = {
       		},
       		{
         		test: /\.scss$/,
-        		// important: use vue-style-loader instead of style-loader
         		use: ExtractTextPlugin.extract({
-              		use: 'sass-loader',
-              		fallback: 'vue-style-loader'
-            	})
- 
+	          		fallback: 'style-loader',
+	          		use: scssLoader
+        		})
       		}
 		]
 	},

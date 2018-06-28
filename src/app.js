@@ -4,8 +4,14 @@ import { createRouter } from './router'
 import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
 import metaMixin from './Utils/meta-mixin'
+import filters from './Utils/filters'
+import raw from './Utils/raw'
+import slugify from './Utils/slug-mixin'
 
 Vue.mixin(metaMixin)
+Vue.mixin(raw)
+Vue.mixin(slugify)
+Vue.use(filters)
 
 
 export function createApp () {

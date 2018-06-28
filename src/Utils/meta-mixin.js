@@ -20,7 +20,7 @@ function setMeta (meta) {
 		}
 		else {
 			for (var i = 0; i < domMeta.length; i++) {
-				if (domMeta[i].property == key) {
+				if (domMeta[i].getAttribute('property') == key) {
 					domMeta[i].content = meta[key]
 				}
 			}

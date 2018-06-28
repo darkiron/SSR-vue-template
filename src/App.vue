@@ -39,16 +39,21 @@
 
 <style lang="scss">
 
-	$font-primary: 'Helvetica', sans-serif;
-	$color-black: #1d1d1d;
-	$color-white: #fff;
-	$color-orange: #ff5723; 
-	$color-grey: #898989;
+	@import 'Style/style.css';
+	@import 'Style/variables.scss';
+	
+
 
 	body{
 		margin: 0;
 		width: 100%;
-		font-family: $font-primary;
+		font-family: $font-text;
+	}
+
+	h1, h2, h3, h4, h5, h5 {
+		font-family: $font-title;
+		text-transform: uppercase;
+	    letter-spacing: 1px;
 	}
 
 	#app{

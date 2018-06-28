@@ -1,6 +1,7 @@
 <template>
 	<div class="content">
-		This is  {{ name }} !
+		<p>This is  {{ name }} !</p>
+		<p>This site is a demo and boilerplate of SSR with wellknow JavaScript framework Vue. </p>
 	</div>
 </template>
 <script>
