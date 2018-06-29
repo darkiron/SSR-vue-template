@@ -25,8 +25,8 @@
 			"title": "Create your webpack configuration", 
 			"description": "You need to compile your code differently way for server-side and the client side",
 			"description_longue": "You need to compile your code differently way for server-side and the client side. You need to create (see previously) server entry and client entry.",
-			"image": "webpack.svg",
-			"ogimage": "webpack.svg"
+			"image": "webpack.png",
+			"ogimage": "webpack.png"
 		},
 		{
 			"title": "Thinks server-side !", 

@@ -6,7 +6,7 @@
 
 		<section>
 			<article v-for="(article, index) in articles" :key="index">
-				<img v-if="article.image" :class="isSVG(article.image)" :src="'/crop/' + article.image +'/'+ size(index) +'/350/jpg'" alt="" ref="image"/>
+				<img v-if="article.image" :class="isSVG(article.image)" :src="imageSource(article.image, index)" alt="" ref="image"/>
 				<div>
 					<h3>{{ article.title }}</h3>
 					<div>
@@ -55,7 +55,20 @@
 				})
 					
 				return size
-			} 
+			},
+
+			imgExtension (image) {
+				let regex = RegExp('^([a-z]+)(\.)(.{3,})$','g')
+				return regex.exec(image)[3]
+			},
+
+			imageSource (image, index) {
+				if (!this.isSVG(image)) {
+					return `/crop/${image}/${this.size(index)}/350/${this.imgExtension(image)}`
+				}
+
+				return `${image}`
+			}
 		},
 		beforeMount () {
 			axios.get('api.json').then(
@@ -93,6 +106,10 @@
 	    flex-grow: 1;
 	    position: relative;
 
+	    @media screen and (max-width: $small) {
+			width: 100%;
+		}
+
 	    a {
 			position: absolute;
 		    top: 0;
@@ -104,11 +121,12 @@
 
 		&:nth-child(3n+1){
 			width: 100%!important;
+
+			h3{
+				width: 100%!important;
+			}
 		}
 
-		&:nth-child(3n+1) h3{
-			width: 100%!important;
-		}
 
 		img {
 			width: 100%;
