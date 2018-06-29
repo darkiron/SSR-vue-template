@@ -44,7 +44,7 @@
 	
 
 
-	body{
+	body {
 		margin: 0;
 		width: 100%;
 		font-family: $font-text;
@@ -56,17 +56,25 @@
 	    letter-spacing: 1px;
 	}
 
-	#app{
+	#app {
 		min-height: 100vh;
 		display: flex;
 		flex-direction: column;
+		width: 100%;
 	}
 
-	header{
+	header {
 		align-items:center;
 		justify-content:center;
 		height: 50%;
 		width:100%;
+
+		h1 {
+			@media screen and (max-width: $small) {
+				padding: 1rem;
+				text-align: center;
+			}
+		}
 	}
 
 	main {
@@ -75,7 +83,7 @@
     	justify-content: center;
 	}
 
-	footer{
+	footer {
 	    margin-top: auto;
 	    padding: 1rem;
 	    min-height: 20%;
@@ -84,18 +92,23 @@
 	    letter-spacing: .5px;
 	}
 
-	header, footer{
+	header, footer {
 		display: inherit;
 		flex-direction: column;
 		background: $color-black;
 		color: $color-white;
 	}
 
-	nav{ 
+	img {
+		display: inline-block;
+		box-shadow: 8px 6px 20px rgba(0, 0, 0, .36);
+	}
+
+	nav { 
 
 		margin: .5rem 0;
 
-		a{
+		a {
 			margin: .5rem;
 		    text-decoration: none;
 		    color: $color-grey;
@@ -106,20 +119,30 @@
 		    letter-spacing: 1px;
 		    transition: all ease 1s;
 
-		    &:hover{
+		    &:hover {
 				color: $color-orange;
 			}
 		}
 	}
 
 	footer {
-		.container{
+		.container {
 			width: calc(100% - 2rem);
+
+			@media screen and (max-width: $small) {
+				width: 100%;
+			}
 		}
 
-		.left, .right{
+		.left, .right {
 			width: 15rem;
 			padding: 1rem;
+
+			@media screen and (max-width: $small) {
+				/*width: 100%;*/
+				width: calc(100% - 2rem);
+				float: none!important;
+			}
 		}
 		.left {
 			float: left;
@@ -135,7 +158,7 @@
 
 	ul {
 
-		li{
+		li {
 			list-style: none;
 
 			a {
@@ -153,7 +176,7 @@
 				border-radius: 1px;
 				width: 4rem;
 
-				&:before{
+				&:before {
 					width: 2rem;
 					height: 1px;
 					content : " ";
@@ -165,7 +188,7 @@
 					transition: all 200ms linear;
 				}
 
-				&:hover:before{
+				&:hover:before {
 					width: -0px;
 					transition: all 200ms linear;
 					margin: 0px;
@@ -179,7 +202,7 @@
 	.component-fade-enter-active, .component-fade-leave-active {
 	  transition: opacity .3s ease;
 	}
-	.component-fade-enter, .component-fade-leave-to{
+	.component-fade-enter, .component-fade-leave-to {
 	  opacity: 0;
 	}
 

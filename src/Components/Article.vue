@@ -46,6 +46,24 @@
 	.article{
 		width: 50%;
 
+		@media screen and (max-width: $small) {
+			width: 100%!important;
+
+			img {
+				width: calc((100% - 2rem));
+			}
+		}
+
+		@media screen and (max-width: $medium) {
+			width: inherit!important;
+		}
+
+		p {
+			@media screen and (max-width: $medium) {
+				padding: 0 1rem;;
+			}
+		}
+
 		article{
 			margin-top: 5rem;
 			margin-left:auto;
